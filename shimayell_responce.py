@@ -3,14 +3,23 @@
 import csv
 import subprocess
 
-with open(r'talks/setting.csv') as f:
-    reader = csv.reader(f)
-    talks = { line[0] : line[1] for line in reader }
 
+with open(r'voices/speakers.csv', 'r') as f:
+    reader = next(csv.reader(f))
+    speakers = { line[0] : line[1] for line in reader if line }
+    print('speakers: ', speakers)
 
-end_texts = ['goodbye', 'bye-bye', 'ばいばい', 'バイバイ']
+for folderName in set(speakers.values()):
+    voices[folderName] = {}
+    with open(r'voices/{}/voices.csv'.format(folderName), 'r') as f:
+        reader = next(csv.reader(f))
+        voices[folderName] = { line[0] : line[1] for line in reader }
+    print('voices[', folderName, ']: ', voices[folderName])
+
+speaker = speaker.keys()[0]
+
 def is_end_text(text):
-    return text in end_texts
+    return text in ['goodbye', 'bye-bye', 'ばいばい', 'バイバイ']
 
 
 def responce(text):
