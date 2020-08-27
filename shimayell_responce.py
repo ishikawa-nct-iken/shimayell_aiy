@@ -5,7 +5,8 @@ import subprocess
 
 
 with open(r'voices/speakers.csv', 'r') as f:
-    reader = next(csv.reader(f))
+    reader = csv.reader(f)
+    header = next(reader)
     speakers = { line[0] : line[1] for line in reader if line }
     print('speakers: ', speakers)
 
@@ -13,7 +14,8 @@ voices = {}
 for folderName in set(speakers.values()):
     voices[folderName] = {}
     with open(r'voices/{}/voices.csv'.format(folderName), 'r') as f:
-        reader = next(csv.reader(f))
+        reader = csv.reader(f)
+        header = next(reader)
         voices[folderName] = { line[0] : line[1] for line in reader }
     print('voices[', folderName, ']: ', voices[folderName])
 
