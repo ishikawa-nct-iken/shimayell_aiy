@@ -3,7 +3,6 @@
 import csv
 import subprocess
 
-talks = {}
 with open(r'talks/setting.csv') as f:
     reader = csv.reader(f)
     talks = { line[0] : line[1] for line in reader }
