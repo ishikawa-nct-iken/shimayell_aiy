@@ -26,7 +26,7 @@ def is_end_text(text):
 
 
 def responce(text):
-    if text in talks:
+    if text in voices[speakers[speaker]]:
         filePath = r'voices/' + speakers[speaker] + r'/' + talks[text]
         print('aplay', filePath)
         subprocess.run(['aplay', filePath])
