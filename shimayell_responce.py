@@ -9,6 +9,7 @@ with open(r'voices/speakers.csv', 'r') as f:
     speakers = { line[0] : line[1] for line in reader if line }
     print('speakers: ', speakers)
 
+voices = {}
 for folderName in set(speakers.values()):
     voices[folderName] = {}
     with open(r'voices/{}/voices.csv'.format(folderName), 'r') as f:
