@@ -15,7 +15,6 @@ speaker = list(speakers.keys())[0]
 
 voices = {}
 for folderName in set(speakers.values()):
-    voices[folderName] = {}
     with open(r'voices/{}/voices.csv'.format(folderName), 'r') as f:
         reader = csv.reader(f)
         header = next(reader)
