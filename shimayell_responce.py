@@ -19,7 +19,7 @@ for folderName in set(speakers.values()):
         voices[folderName] = { line[0] : line[1] for line in reader }
     print('voices[', folderName, ']: ', voices[folderName])
 
-speaker = speaker.keys()[0]
+speaker = list(speakers.keys())[0]
 
 def is_end_text(text):
     return text in ['goodbye', 'bye-bye', 'ばいばい', 'バイバイ']
