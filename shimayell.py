@@ -35,6 +35,9 @@ def main():
                 print('Bye!')
                 break
 
+            if shimayell_responce.change_speaker(text):
+                continue
+
             shimayell_responce.responce(text)
 
 
