@@ -18,5 +18,5 @@ def responce(text):
     if text in talks:
         print('aplay', r'./audios/' + talks[text])
         subprocess.run(['aplay', r'./audios/' + talks[text]])
-    else
+    else:
         print('sorry not find.')
