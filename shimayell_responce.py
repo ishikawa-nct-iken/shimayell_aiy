@@ -16,6 +16,7 @@ def is_end_text(text):
 
 def responce(text):
     if text in talks:
+        print('aplay', r'./audios/' + talks[text])
         subprocess.run(['aplay', r'./audios/' + talks[text]])
-
-    return 'ごめんさい．分かりませんでした．'
+    else
+        print('sorry not find.')

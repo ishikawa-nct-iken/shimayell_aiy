@@ -35,7 +35,7 @@ def main():
                 print('Bye!')
                 break
 
-            print(shimayell_responce.responce(text))
+            shimayell_responce.responce(text)
 
 
 if __name__ == '__main__':
