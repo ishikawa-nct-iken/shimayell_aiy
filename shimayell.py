@@ -37,10 +37,6 @@ def main():
 
             print(shimayell_responce.responce(text))
 
-            if audio:
-                print('audio play')
-                aiy.audio.play_audio(audio)
-
 
 if __name__ == '__main__':
     main()
