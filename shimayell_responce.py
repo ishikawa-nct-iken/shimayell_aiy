@@ -27,7 +27,8 @@ def is_end_text(text):
 
 def responce(text):
     if text in talks:
-        print('aplay', r'./audios/' + talks[text])
-        subprocess.run(['aplay', r'./audios/' + talks[text]])
+        filePath = r'voices/' + speakers[speaker] + r'/' + talks[text]
+        print('aplay', filePath)
+        subprocess.run(['aplay', filePath])
     else:
-        print('sorry not find.')
+        print('not find file.')
