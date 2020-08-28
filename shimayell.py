@@ -30,15 +30,16 @@ def main():
             text, _ = assistant.recognize()
             print('You said "', text, '"')
 
-            if shimayell_responce.is_end_text(text):
-                status_ui.status('stopping')
-                print('Bye!')
-                break
+            if text:
+                if shimayell_responce.is_end_text(text):
+                    status_ui.status('stopping')
+                    print('Bye!')
+                    break
 
-            if shimayell_responce.change_speaker(text):
-                continue
+                if shimayell_responce.change_speaker(text):
+                    continue
 
-            shimayell_responce.responce(text)
+                shimayell_responce.responce(text)
 
 
 if __name__ == '__main__':

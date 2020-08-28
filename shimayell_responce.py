@@ -57,7 +57,7 @@ def responce(text):
                 print('not find any file in', path, '.')
             else:
                 filepath = random.choice(filespath)
-                subprocess.run(['aplay', filepath)
+                subprocess.run(['aplay', filepath])
         else:
             print('not find', path, '.')
     else:
