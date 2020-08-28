@@ -13,7 +13,7 @@ with open(r'voices/speakers.csv', 'r') as f:
     speakers = { line[0] : line[1] for line in reader}
     print('speakers: ', speakers)
 
-speaker = list(speakers.keys())[0]
+speaker = speakers['@default']
 
 voices = {}
 for folderName in set(speakers.values()):
