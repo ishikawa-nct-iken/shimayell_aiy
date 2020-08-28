@@ -14,6 +14,7 @@ with open(r'voices/speakers.csv', 'r') as f:
     print('speakers: ', speakers)
 
 speaker = speakers['@default']
+print('speaker is', speaker)
 
 voices = {}
 for folderName in set(speakers.values()):
@@ -47,6 +48,7 @@ def change_speaker(text):
 
 
 def responce(text):
+    print(speaker)
     print(speakers[speaker])
     print(voices[speakers[speaker]])
     if text in voices[speakers[speaker]]:
