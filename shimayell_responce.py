@@ -35,7 +35,7 @@ def is_end_text(text):
 
 
 
-change_speaker_pattern = r'.+(?=[にへ]変更)'
+change_speaker_pattern = r'.+(?=[にへ](変更|変えて))'
 change_speaker_repatter = re.compile(change_speaker_pattern)
 
 def change_speaker(text):
