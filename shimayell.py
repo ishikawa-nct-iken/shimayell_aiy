@@ -37,6 +37,7 @@ def main():
                     break
 
                 if shimayell_responce.change_speaker(text):
+                    print('change')
                     continue
 
                 shimayell_responce.responce(text)

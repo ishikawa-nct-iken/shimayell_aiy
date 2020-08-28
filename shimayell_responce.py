@@ -41,11 +41,14 @@ def change_speaker(text):
     result = change_speaker_repatter.match(text)
     if result and result.group() in speakers:
         speaker = result.group()
+        print('change speaker to', speaker)
         return True
     return False
 
 
 def responce(text):
+    print(speakers[speaker])
+    print(voices[speakers[speaker]])
     if text in voices[speakers[speaker]]:
         path = r'voices/' + speakers[speaker] + r'/' + voices[speakers[speaker]][text]
         if os.path.isfile(path):
