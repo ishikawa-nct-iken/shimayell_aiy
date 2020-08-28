@@ -56,9 +56,8 @@ def responce(text):
             if len(filespath) == 0:
                 print('not find any file in', path, '.')
             else:
-                rnd = random.randrange(len(filespath) - 1)
-                print('aplay', filespath[rnd])
-                subprocess.run(['aplay', filespath[rnd]])
+                filepath = random.choice(filespath)
+                subprocess.run(['aplay', filepath)
         else:
             print('not find', path, '.')
     else:
