@@ -1,5 +1,13 @@
 # shimayell_aiy
 
+## AIY Voice Kitでのダウンロード方法
+
+> git clone https://github.com/ishikawa-nct-iken/shimayell_aiy.git
+
+## アップデート
+
+> git pull
+
 ## 実行方法
 
 > python3 shimayell.py
@@ -22,8 +30,6 @@
 
 - 開始時や終了時，認識できなかった時に，start.wavやend.wav, not_found.wavなどの特別な音声を再生する
 
-- 音声をファイルでなくフォルダとして指定した際，フォルダ内のランダムな音声を再生する
-
 - setting.iniなどで話者の変更を保存する
 
-- 音声を必要に応じてダウンロードするようにする
+- 音声を必要に応じてダウンロード・アップデートするようにする

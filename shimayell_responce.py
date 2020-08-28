@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
+import os
 import csv
 import subprocess
 import re
+import random
 
 
 with open(r'voices/speakers.csv', 'r') as f:
@@ -40,14 +42,24 @@ def change_speaker(text):
     if result and result.group() in speakers:
         speaker = result.group()
         return True
-    
     return False
 
 
 def responce(text):
     if text in voices[speakers[speaker]]:
-        filePath = r'voices/' + speakers[speaker] + r'/' + voices[speakers[speaker]][text]
-        print('aplay', filePath)
-        subprocess.run(['aplay', filePath])
+        path = r'voices/' + speakers[speaker] + r'/' + voices[speakers[speaker]][text]
+        if os.path.isfile(path):
+            print('aplay', path)
+            subprocess.run(['aplay', path])
+        else if os.path.isdir(path):
+            filespath = [os.path.join(path, f) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
+            if len(filespath) == 0:
+                print('not find any file in', path, '.')
+            else:
+                rnd = random.randrange(len(filespath) - 1)
+                print('aplay', filespath[rnd])
+                subprocess.run(['aplay', filespath[rnd]])
+        else:
+            print('not find', path, '.')
     else:
-        print('not find file.')
+        print('not find talk.')
