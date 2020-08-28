@@ -55,16 +55,23 @@ def responce(text):
     if text in voices[speakers[speaker]]:
         path = r'voices/' + speakers[speaker] + r'/' + voices[speakers[speaker]][text]
         if os.path.isfile(path):
-            print('aplay', path)
-            subprocess.run(['aplay', path])
+            play_voice(path)
         elif os.path.isdir(path):
             filespath = [os.path.join(path, f) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
             if len(filespath) == 0:
                 print('not find any file in', path, '.')
             else:
-                filepath = random.choice(filespath)
-                subprocess.run(['aplay', filepath])
+                play_voice(filespath)
         else:
             print('not find', path, '.')
     else:
         print('not find talk.')
+
+def play_voice(filepath):
+    _, ext = os.path.splitext(filepath)
+    if ext == '.wav':
+        print('aplay', path)
+        subprocess.run(['aplay', path])
+    elif ext == '.mp3':
+        print('mpg321', path)
+        subprocess.run(['mpg321', path])
