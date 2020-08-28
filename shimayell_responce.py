@@ -70,8 +70,8 @@ def responce(text):
 def play_voice(filepath):
     _, ext = os.path.splitext(filepath)
     if ext == '.wav':
-        print('aplay', path)
-        subprocess.run(['aplay', path])
+        print('aplay', filepath)
+        subprocess.run(['aplay', patfilepathh])
     elif ext == '.mp3':
-        print('mpg321', path)
-        subprocess.run(['mpg321', path])
+        print('mpg321', filepath)
+        subprocess.run(['mpg321', filepath])
