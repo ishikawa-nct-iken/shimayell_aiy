@@ -13,7 +13,7 @@ with open(r'voices/speakers.csv', 'r') as f:
     speakers = { line[0] : line[1] for line in reader}
     print('speakers: ', speakers)
 
-speaker = speakers['@default']
+speaker = '@default'
 print('speaker is', speaker)
 
 voices = {}
@@ -41,6 +41,7 @@ change_speaker_repatter = re.compile(change_speaker_pattern)
 def change_speaker(text):
     result = change_speaker_repatter.match(text)
     if result and result.group() in speakers:
+        global speaker
         speaker = result.group()
         print('change speaker to', speaker)
         return True
