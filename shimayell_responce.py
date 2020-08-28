@@ -51,7 +51,7 @@ def responce(text):
         if os.path.isfile(path):
             print('aplay', path)
             subprocess.run(['aplay', path])
-        else if os.path.isdir(path):
+        elif os.path.isdir(path):
             filespath = [os.path.join(path, f) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
             if len(filespath) == 0:
                 print('not find any file in', path, '.')
