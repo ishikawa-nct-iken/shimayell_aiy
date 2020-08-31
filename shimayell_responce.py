@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import os
+from os import path
 import csv
 import subprocess
 import re
@@ -34,6 +34,18 @@ def is_end_text(text):
     return text in end_texts
 
 
+def responce(text):
+    print('speaker is', speaker)
+
+    if change_speaker(text):
+        return
+
+    if text in voices[speakers[speaker]]:
+        voicepath = r'voices/' + speakers[speaker] + r'/' + voices[speakers[speaker]][text]
+        play(voicepath)
+    else:
+        print('not find talk.')
+
 
 change_speaker_pattern = r'.+(?=[にへ](変更|変えて))'
 change_speaker_repatter = re.compile(change_speaker_pattern)
@@ -48,27 +60,20 @@ def change_speaker(text):
     return False
 
 
-def responce(text):
-    print(speaker)
-    print(speakers[speaker])
-    print(voices[speakers[speaker]])
-    if text in voices[speakers[speaker]]:
-        path = r'voices/' + speakers[speaker] + r'/' + voices[speakers[speaker]][text]
-        if os.path.isfile(path):
-            play_voice(path)
-        elif os.path.isdir(path):
-            filespath = [os.path.join(path, f) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
-            if len(filespath) == 0:
-                print('not find any file in', path, '.')
-            else:
-                play_voice(filespath)
+def play(voicepath):
+    if path.isfile(voicepath):
+        play_voice(voicepath)
+    elif path.isdir(voicepath):
+        filespath = [path.join(voicepath, f) for f in os.listdir(voicepath) if os.path.isfile(os.path.join(voicepath, f))]
+        if len(filespath) == 0:
+            print('not find any file in', voicepath, '.')
         else:
-            print('not find', path, '.')
+            play_voice(filespath)
     else:
-        print('not find talk.')
+        print('not find', voicepath, '.')
 
 def play_voice(filepath):
-    _, ext = os.path.splitext(filepath)
+    _, ext = path.splitext(filepath)
     if ext == '.wav':
         print('aplay', filepath)
         subprocess.run(['aplay', filepath])
