@@ -18,11 +18,13 @@ print('speaker is', speaker)
 
 voices = {}
 for folderName in set(speakers.values()):
-    with open(r'voices/{}/voices.csv'.format(folderName), 'r') as f:
-        reader = csv.reader(f)
-        header = next(reader)
-        voices[folderName] = { line[0] : line[1] for line in reader }
-    print('voices[', folderName, ']: ', voices[folderName])
+    csvpath = r'voices/{}/voices.csv'.format(folderName)
+    if path.isfile(csvpath):
+        with open(csvpath, 'r') as f:
+            reader = csv.reader(f)
+            header = next(reader)
+            voices[folderName] = { line[0] : line[1] for line in reader }
+        print('voices[', folderName, ']: ', voices[folderName])
 
 
 with open(r'voices/end_texts.txt', 'r') as f:
@@ -30,9 +32,10 @@ with open(r'voices/end_texts.txt', 'r') as f:
     end_texts = [ end_text for end_text in f.read().splitlines() ]
     print('end_texts: ', end_texts)
 
-def is_end_text(text):
-    return text in end_texts
+start()
 
+def start():
+    play('start')
 
 def responce(text):
     print('speaker is', speaker)
@@ -46,6 +49,8 @@ def responce(text):
     else:
         print('not find talk.')
 
+def is_end_text(text):
+    return text in end_texts
 
 change_speaker_pattern = r'.+(?=[にへ](変更|変えて))'
 change_speaker_repatter = re.compile(change_speaker_pattern)
@@ -54,23 +59,27 @@ def change_speaker(text):
     result = change_speaker_repatter.match(text)
     if result and result.group() in speakers:
         global speaker
-        speaker = result.group()
-        print('change speaker to', speaker)
-        return True
+        if speaker != result.group()
+            speaker = result.group()
+            print('change speaker to', speaker)
+            start()
+            return True
     return False
 
 
-def play(voicepath):
+def play(voicepath, put_error = true):
     if path.isfile(voicepath):
         play_voice(voicepath)
     elif path.isdir(voicepath):
         filespath = [path.join(voicepath, f) for f in os.listdir(voicepath) if os.path.isfile(os.path.join(voicepath, f))]
         if len(filespath) == 0:
-            print('not find any file in', voicepath, '.')
+            if put_error:
+                print('not find any file in', voicepath, '.')
         else:
             play_voice(filespath)
     else:
-        print('not find', voicepath, '.')
+        if put_error:
+            print('not find', voicepath, '.')
 
 def play_voice(filepath):
     _, ext = path.splitext(filepath)
