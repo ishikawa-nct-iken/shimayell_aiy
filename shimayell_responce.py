@@ -61,7 +61,7 @@ def change_speaker(text):
     return False
 
 
-def play(text, put_error = true):
+def play(text, put_error = True):
     if text in voices[speakers[speaker]]:
         voicepath = r'voices/' + speakers[speaker] + r'/' + voices[speakers[speaker]][text]
         if path.isfile(voicepath):
