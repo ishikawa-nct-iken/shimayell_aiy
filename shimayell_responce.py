@@ -59,7 +59,7 @@ def change_speaker(text):
     result = change_speaker_repatter.match(text)
     if result and result.group() in speakers:
         global speaker
-        if speaker != result.group()
+        if speaker != result.group():
             speaker = result.group()
             print('change speaker to', speaker)
             start()
