@@ -32,10 +32,10 @@ with open(r'voices/end_texts.txt', 'r') as f:
     end_texts = [ end_text for end_text in f.read().splitlines() ]
     print('end_texts: ', end_texts)
 
-start()
-
 def start():
     play('start', False)
+
+start()
 
 def responce(text):
     print('speaker is', speaker)
