@@ -66,20 +66,24 @@ def change_speaker(text):
     return False
 
 
-def play(voice, put_error = true):
-    voicepath = r'voices/' + speakers[speaker] + r'/' + voices[speakers[speaker]][voice]
-    if path.isfile(voicepath):
-        play_voice(voicepath)
-    elif path.isdir(voicepath):
-        filespath = [path.join(voicepath, f) for f in os.listdir(voicepath) if os.path.isfile(os.path.join(voicepath, f))]
-        if len(filespath) == 0:
-            if put_error:
-                print('not find any file in', voicepath, '.')
+def play(text, put_error = true):
+    if text in voices[speakers[speaker]]:
+        voicepath = r'voices/' + speakers[speaker] + r'/' + voices[speakers[speaker]][text]
+        if path.isfile(voicepath):
+            play_voice(voicepath)
+        elif path.isdir(voicepath):
+            filespath = [path.join(voicepath, f) for f in os.listdir(voicepath) if os.path.isfile(os.path.join(voicepath, f))]
+            if len(filespath) == 0:
+                if put_error:
+                    print('not find any file in', voicepath, '.')
+            else:
+                play_voice(filespath)
         else:
-            play_voice(filespath)
+            if put_error:
+                print('not find', voicepath, '.')
     else:
         if put_error:
-            print('not find', voicepath, '.')
+            print('not find in voices.')
 
 def play_voice(filepath):
     _, ext = path.splitext(filepath)
