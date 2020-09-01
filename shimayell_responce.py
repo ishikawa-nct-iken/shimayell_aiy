@@ -35,7 +35,7 @@ with open(r'voices/end_texts.txt', 'r') as f:
 start()
 
 def start():
-    play('start')
+    play('start', False)
 
 def responce(text):
     print('speaker is', speaker)
@@ -44,8 +44,7 @@ def responce(text):
         return
 
     if text in voices[speakers[speaker]]:
-        voicepath = r'voices/' + speakers[speaker] + r'/' + voices[speakers[speaker]][text]
-        play(voicepath)
+        play(text)
     else:
         print('not find talk.')
 
@@ -67,7 +66,8 @@ def change_speaker(text):
     return False
 
 
-def play(voicepath, put_error = true):
+def play(voice, put_error = true):
+    voicepath = r'voices/' + speakers[speaker] + r'/' + voices[speakers[speaker]][voice]
     if path.isfile(voicepath):
         play_voice(voicepath)
     elif path.isdir(voicepath):
