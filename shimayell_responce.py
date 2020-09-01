@@ -32,11 +32,6 @@ with open(r'voices/end_texts.txt', 'r') as f:
     end_texts = [ end_text for end_text in f.read().splitlines() ]
     print('end_texts: ', end_texts)
 
-def start():
-    play('start', False)
-
-start()
-
 def responce(text):
     print('speaker is', speaker)
 
@@ -93,3 +88,8 @@ def play_voice(filepath):
     elif ext == '.mp3':
         print('mpg321', filepath)
         subprocess.run(['mpg321', filepath])
+
+def start():
+    play('start', False)
+
+start()
