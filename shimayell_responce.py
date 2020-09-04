@@ -3,7 +3,7 @@
 from os import path
 import csv
 import re
-from play_voice import play_voice
+from play_voice import play_voice, start
 
 
 def init():
@@ -31,6 +31,7 @@ def init():
                 voices[folderName] = { line[0] : line[1] for line in reader }
             print('voices[', folderName, ']:', voices[folderName])
 
+    global end_texts
     with open(r'voices/end_texts.txt', 'r') as f:
         reader = csv.reader(f)
         end_texts = [ end_text for end_text in f.read().splitlines() ]
@@ -98,4 +99,4 @@ def responce(text):
 
 init()
 
-start()
+#start()

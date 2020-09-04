@@ -6,7 +6,7 @@ import aiy.assistant.grpc
 import aiy.audio
 import aiy.voicehat
 
-import shimayell_responce
+import shimayell_responce as sr
 
 logging.basicConfig(
     level=logging.INFO,
@@ -31,12 +31,12 @@ def main():
             print('You said "', text, '"')
 
             if text:
-                if shimayell_responce.is_end_text(text):
+                if sr.is_end_text(text):
                     status_ui.status('stopping')
                     print('Bye!')
                     break
 
-                shimayell_responce.responce(text)
+                sr.responce(text)
 
 
 if __name__ == '__main__':

@@ -16,7 +16,8 @@ def play_voice(voicepath, play_error = True):
     play_error : bool
         エラー時，それに対応した音声を再生するかどうか．
     """
-    voicepath = path.join(r'voices', voicepath)
+    voicepath = path.join('voices', voicepath)
+    print('voicepath:', voicepath)
     if path.isfile(voicepath):
         play_voice(voicepath)
     elif path.isdir(voicepath):
