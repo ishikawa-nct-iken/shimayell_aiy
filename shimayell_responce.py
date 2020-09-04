@@ -2,54 +2,48 @@
 
 from os import path
 import csv
-import subprocess
 import re
-import random
+from play_voice import play_voice
 
 
-with open(r'voices/speakers.csv', 'r') as f:
-    reader = csv.reader(f)
-    header = next(reader)
-    speakers = { line[0] : line[1] for line in reader}
-    print('speakers: ', speakers)
+def init():
+    """
+    初期化する．
+    """
+    global speakers
+    with open(r'voices/speakers.csv', 'r') as f:
+        reader = csv.reader(f)
+        header = next(reader)
+        speakers = { line[0] : line[1] for line in reader}
+        print('speakers:', speakers)
 
-speaker = '@default'
-print('speaker is', speaker)
+    global speaker = '@default'
 
-voices = {}
-for folderName in set(speakers.values()):
-    csvpath = r'voices/{}/voices.csv'.format(folderName)
-    if path.isfile(csvpath):
-        with open(csvpath, 'r') as f:
-            reader = csv.reader(f)
-            header = next(reader)
-            voices[folderName] = { line[0] : line[1] for line in reader }
-        print('voices[', folderName, ']: ', voices[folderName])
+    global voices = {}
+    for folderName in set(speakers.values()):
+        csvpath = path.join('voices',folderName,'voices.csv')
+        if path.isfile(csvpath):
+            with open(csvpath, 'r') as f:
+                reader = csv.reader(f)
+                header = next(reader)
+                voices[folderName] = { line[0] : line[1] for line in reader }
+            print('voices[', folderName, ']:', voices[folderName])
 
+    with open(r'voices/end_texts.txt', 'r') as f:
+        reader = csv.reader(f)
+        end_texts = [ end_text for end_text in f.read().splitlines() ]
+        print('end_texts:', end_texts)
 
-with open(r'voices/end_texts.txt', 'r') as f:
-    reader = csv.reader(f)
-    end_texts = [ end_text for end_text in f.read().splitlines() ]
-    print('end_texts: ', end_texts)
-
-def responce(text):
-    print('speaker is', speaker)
-
-    if change_speaker(text):
-        return
-
-    if text in voices[speakers[speaker]]:
-        play(text)
-    else:
-        print('not find talk.')
-
-def is_end_text(text):
-    return text in end_texts
-
-change_speaker_pattern = r'.+(?=[にへ](変更|変えて))'
-change_speaker_repatter = re.compile(change_speaker_pattern)
 
 def change_speaker(text):
+    """
+    話者を変更する．
+
+    Parameters
+    ----------
+    text : str
+        利用者のボイステキスト．
+    """
     result = change_speaker_repatter.match(text)
     if result and result.group() in speakers:
         global speaker
@@ -61,35 +55,45 @@ def change_speaker(text):
     return False
 
 
-def play(text, put_error = True):
+change_speaker_pattern = r'.+(?=[にへ](変更|変えて))'
+change_speaker_repatter = re.compile(change_speaker_pattern)
+def is_end_text(text):
+    """
+    終了の言葉かどうか．
+
+    Parameters
+    ----------
+    text : str
+        利用者のボイステキスト．
+
+    Returns
+    -------
+    is_end : bool
+        終了の言葉かどうか．
+    """
+    return text in end_texts
+
+
+def responce(text):
+    """
+    返事をする．
+
+    Parameters
+    ----------
+    text : str
+        利用者のボイステキスト．
+    """
+    print('speaker is', speaker)
+
+    if change_speaker(text):
+        return
+
     if text in voices[speakers[speaker]]:
-        voicepath = r'voices/' + speakers[speaker] + r'/' + voices[speakers[speaker]][text]
-        if path.isfile(voicepath):
-            play_voice(voicepath)
-        elif path.isdir(voicepath):
-            filespath = [path.join(voicepath, f) for f in os.listdir(voicepath) if os.path.isfile(os.path.join(voicepath, f))]
-            if len(filespath) == 0:
-                if put_error:
-                    print('not find any file in', voicepath, '.')
-            else:
-                play_voice(filespath)
-        else:
-            if put_error:
-                print('not find', voicepath, '.')
+        play_voice(path.join(speakers[speaker], voices[speakers[speaker]][text]))
     else:
-        if put_error:
-            print('not find in voices.')
+        print('not find talk.')
 
-def play_voice(filepath):
-    _, ext = path.splitext(filepath)
-    if ext == '.wav':
-        print('aplay', filepath)
-        subprocess.run(['aplay', filepath])
-    elif ext == '.mp3':
-        print('mpg321', filepath)
-        subprocess.run(['mpg321', filepath])
 
-def start():
-    play('start', False)
+init()
 
 start()
