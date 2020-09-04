@@ -99,4 +99,4 @@ def responce(text):
 
 init()
 
-#start()
+start()

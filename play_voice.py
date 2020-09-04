@@ -19,7 +19,7 @@ def play_voice(voicepath, play_error = True):
     voicepath = path.join('voices', voicepath)
     print('voicepath:', voicepath)
     if path.isfile(voicepath):
-        play_voice(voicepath)
+        play_file(voicepath)
     elif path.isdir(voicepath):
         filespath = [path.join(voicepath, f) for f in listdir(voicepath) if os.path.isfile(os.path.join(voicepath, f))]
         if len(filespath) == 0:
@@ -34,7 +34,7 @@ def play_voice(voicepath, play_error = True):
             play_voice('file_error', False)
 
 
-def play_voice(filepath):
+def play_file(filepath):
     """
     指定した音楽ファイルを再生する．
 

@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
+import shimayell_responce as sr
+
 import logging
 
 import aiy.assistant.grpc
 import aiy.audio
 import aiy.voicehat
 
-import shimayell_responce as sr
 
 logging.basicConfig(
     level=logging.INFO,
