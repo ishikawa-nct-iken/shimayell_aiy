@@ -17,9 +17,11 @@ def init():
         speakers = { line[0] : line[1] for line in reader}
         print('speakers:', speakers)
 
-    global speaker = '@default'
+    global speaker
+    speaker = '@default'
 
-    global voices = {}
+    global voices
+    voices = {}
     for folderName in set(speakers.values()):
         csvpath = path.join('voices',folderName,'voices.csv')
         if path.isfile(csvpath):
