@@ -5,7 +5,6 @@ import csv
 import re
 from play_voice import play_voice, start
 
-
 def init():
     """
     初期化する．
@@ -92,8 +91,11 @@ def responce(text):
     if change_speaker(text):
         return
 
-    if text in voices[speakers[speaker]]:
-        play_voice(path.join(speakers[speaker], voices[speakers[speaker]][text]))
+    for voice in voices[speakers[speaker]]:
+        if re.search(voice, text):
+            print(voice, text)
+            play_voice(path.join(speakers[speaker], voice))
+            break
     else:
         print('not find talk.')
 
