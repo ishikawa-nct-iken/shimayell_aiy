@@ -1,22 +1,26 @@
 # shimayell_aiy
 
-## AIY Voice Kitでのダウンロード方法
+## 構築方法
 
-> git clone https://github.com/ishikawa-nct-iken/shimayell_aiy.git
+1. 以下のリンクで最も新しいシマエーるのフォルダをダウンロードする
 
-## アップデート
+    https://github.com/ishikawa-nct-iken/shimayell_aiy/releases
 
-> git pull
+2. 以下のようなコマンド等で解凍する
+
+    > tar -zxvf xxx.tar.gz
+
+3. /home/pi/ に client_id.json を置く
 
 ## 実行方法
 
 - 音声入力
 
-> python3 shimayell.py
+    > python3 shimayell.py
 
 - テキスト入力
 
-> python3 shimayell_text.py
+    > python3 shimayell_text.py
 
 ## 話者変更方法
 
@@ -34,6 +38,4 @@
 
 ## 今後
 
-- setting.iniなどで話者の変更を保存する
-
-- 音声を必要に応じてダウンロード・アップデートするようにする
+- 音声を必要に応じてダウンロード・アップデートするようにしたい

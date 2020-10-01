@@ -55,7 +55,7 @@ def change_speaker(text):
         if speaker != result.group():
             speaker = result.group()
             print('change speaker to', speaker)
-            print(speakers[speaker])
+            start(speakers[speaker])
             return True
 
     return False
