@@ -19,7 +19,7 @@ def main():
     status_ui = aiy.voicehat.get_status_ui()
     status_ui.status('starting')
     assistant = aiy.assistant.grpc.get_assistant()
-    button = aiy.voicehat.get_button()
+    # button = aiy.voicehat.get_button()
     with aiy.audio.get_recorder():
         while True:
             status_ui.status('ready')
