@@ -3,6 +3,7 @@
 from os import path, listdir
 import subprocess
 import random
+import platform
 
 
 def play_voice(voicepath, play_error = True):
@@ -21,7 +22,7 @@ def play_voice(voicepath, play_error = True):
     if path.isfile(voicepath):
         play_file(voicepath)
     elif path.isdir(voicepath):
-        filespath = [path.join(voicepath, f) for f in listdir(voicepath) if os.path.isfile(os.path.join(voicepath, f))]
+        filespath = [path.join(voicepath, f) for f in listdir(voicepath) if path.isfile(path.join(voicepath, f))]
         if len(filespath) == 0:
             print('not find any files in', voicepath, '.')
             if play_error:
@@ -43,7 +44,9 @@ def play_file(filepath):
     filepath : str
         音楽ファイルのパス．
     """
-    pass
+    if platform.system() == 'Windows':
+        return
+
     _, ext = path.splitext(filepath)
     if ext == '.wav':
         print('aplay', filepath)
@@ -55,8 +58,15 @@ def play_file(filepath):
         print('cannot play file', filepath)
 
 
-def start():
+def start(speakerpath):
     """
-    スタート時の音声を再生する．
+    開始時の音声を再生する．
     """
-    play_voice('start', False)
+    play_voice(path.join(speakerpath, '開始時'), False)
+
+
+def end(speakerpath):
+    """
+    終了時の音声を再生する．
+    """
+    play_voice(path.join(speakerpath, '終了時'), False)

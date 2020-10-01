@@ -3,7 +3,7 @@
 from os import path
 import csv
 import re
-from play_voice import play_voice, start
+from play_voice import play_voice, start, end
 
 def init():
     """
@@ -53,8 +53,9 @@ def change_speaker(text):
         if speaker != result.group():
             speaker = result.group()
             print('change speaker to', speaker)
-            start()
+            start(speakers[speaker])
             return True
+
     return False
 
 
@@ -74,7 +75,11 @@ def is_end_text(text):
     is_end : bool
         終了の言葉かどうか．
     """
-    return text in end_texts
+    if text in end_texts:
+        end(speakers[speaker])
+        return True
+
+    return False
 
 
 def responce(text):
@@ -91,10 +96,9 @@ def responce(text):
     if change_speaker(text):
         return
 
-    for voice in voices[speakers[speaker]]:
-        if re.search(voice, text):
-            print(voice, text)
-            play_voice(path.join(speakers[speaker], voice))
+    for voice in voices[speakers[speaker]].items():
+        if re.search(voice[0], text):
+            play_voice(path.join(speakers[speaker], voice[1]))
             break
     else:
         print('not find talk.')
@@ -102,4 +106,4 @@ def responce(text):
 
 init()
 
-start()
+start(speakers[speaker])
