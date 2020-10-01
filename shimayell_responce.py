@@ -5,12 +5,14 @@ import csv
 import re
 from play_voice import play_voice, start, end
 
+homepath = path.dirname(__file__)
+
 def init():
     """
     初期化する．
     """
     global speakers
-    with open(path.join(__file__,r'voices/speakers.csv'), 'r', encoding="utf-8") as f:
+    with open(path.join(homepath, r'voices/speakers.csv'), 'r', encoding="utf-8") as f:
         reader = csv.reader(f)
         header = next(reader)
         speakers = { line[0] : line[1] for line in reader}
@@ -23,7 +25,7 @@ def init():
     voices = {}
     for folderName in set(speakers.values()):
         print('folderName: {}'.format(folderName))
-        csvpath = path.join(__file__, 'voices', folderName, 'voices.csv')
+        csvpath = path.join(homepath, 'voices', folderName, 'voices.csv')
         if path.isfile(csvpath):
             with open(csvpath, 'r', encoding="utf-8") as f:
                 reader = csv.reader(f)
@@ -32,7 +34,7 @@ def init():
             print('voices[', folderName, ']:', voices[folderName])
 
     global end_texts
-    with open(path.join(__file__, r'voices/end_texts.txt'), 'r', encoding="utf-8") as f:
+    with open(path.join(homepath, r'voices/end_texts.txt'), 'r', encoding="utf-8") as f:
         reader = csv.reader(f)
         end_texts = [ end_text for end_text in f.read().splitlines() ]
         print('end_texts:', end_texts)

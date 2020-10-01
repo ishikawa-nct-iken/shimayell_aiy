@@ -5,6 +5,7 @@ import subprocess
 import random
 import platform
 
+homepath = path.dirname(__file__)
 
 def play_voice(voicepath, play_error = True, join_path_voices = True):
     """
@@ -19,7 +20,7 @@ def play_voice(voicepath, play_error = True, join_path_voices = True):
     """
 
     if join_path_voices:
-        voicepath = path.join(__file__, 'voices', voicepath)
+        voicepath = path.join(homepath, 'voices', voicepath)
 
     print('voicepath:', voicepath)
 
