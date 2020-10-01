@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from os import path, listdir, getcwd
+from os import path, listdir
 import subprocess
 import random
 import platform
@@ -19,7 +19,7 @@ def play_voice(voicepath, play_error = True, join_path_voices = True):
     """
 
     if join_path_voices:
-        voicepath = path.join(getcwd(), 'voices', voicepath)
+        voicepath = path.join(__file__, 'voices', voicepath)
 
     print('voicepath:', voicepath)
 
