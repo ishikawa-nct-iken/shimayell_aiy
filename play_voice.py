@@ -6,7 +6,7 @@ import random
 import platform
 
 
-def play_voice(voicepath, play_error = True):
+def play_voice(voicepath, play_error = True, join_path_voices = True):
     """
     指定したパスのファイルもしくはパスのフォルダ中のファイルをランダムに再生する．
 
@@ -17,9 +17,12 @@ def play_voice(voicepath, play_error = True):
     play_error : bool
         エラー時，それに対応した音声を再生するかどうか．
     """
-    print(voicepath)
-    voicepath = path.join('voices', voicepath)
+
+    if join_path_voices:
+        voicepath = path.join('voices', voicepath)
+
     print('voicepath:', voicepath)
+
     if path.isfile(voicepath):
         play_file(voicepath)
     elif path.isdir(voicepath):
@@ -29,7 +32,7 @@ def play_voice(voicepath, play_error = True):
             if play_error:
                 play_voice('file_error', False)
         else:
-            play_voice(filespath)
+            play_voice(random.choice(filespath), True, False)
     else:
         print('not find', voicepath, '.')
         if play_error:
@@ -63,6 +66,7 @@ def start(speakerpath):
     """
     開始時の音声を再生する．
     """
+    print('in start():', path.join(speakerpath, '開始時'))
     play_voice(path.join(speakerpath, '開始時'), False)
 
 
