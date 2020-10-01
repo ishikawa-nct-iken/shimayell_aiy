@@ -24,7 +24,7 @@ def main():
         while True:
             status_ui.status('ready')
             print('Press the button and speak')
-            button.wait_for_press()
+            # button.wait_for_press()
             status_ui.status('listening')
             print('Listening...')
 
