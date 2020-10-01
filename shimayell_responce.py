@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from os import path
+from os import path, getcwd
 import csv
 import re
 from play_voice import play_voice, start, end
@@ -10,7 +10,7 @@ def init():
     初期化する．
     """
     global speakers
-    with open(r'voices/speakers.csv', 'r', encoding="utf-8") as f:
+    with open(path.join(getcwd(),r'voices/speakers.csv'), 'r', encoding="utf-8") as f:
         reader = csv.reader(f)
         header = next(reader)
         speakers = { line[0] : line[1] for line in reader}
@@ -23,7 +23,7 @@ def init():
     voices = {}
     for folderName in set(speakers.values()):
         print('folderName: {}'.format(folderName))
-        csvpath = path.join('voices', folderName, 'voices.csv')
+        csvpath = path.join(getcwd(), 'voices', folderName, 'voices.csv')
         if path.isfile(csvpath):
             with open(csvpath, 'r', encoding="utf-8") as f:
                 reader = csv.reader(f)
@@ -32,7 +32,7 @@ def init():
             print('voices[', folderName, ']:', voices[folderName])
 
     global end_texts
-    with open(r'voices/end_texts.txt', 'r', encoding="utf-8") as f:
+    with open(path.join(getcwd(), r'voices/end_texts.txt'), 'r', encoding="utf-8") as f:
         reader = csv.reader(f)
         end_texts = [ end_text for end_text in f.read().splitlines() ]
         print('end_texts:', end_texts)
