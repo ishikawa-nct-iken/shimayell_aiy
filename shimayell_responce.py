@@ -53,13 +53,13 @@ def change_speaker(text):
         if speaker != result.group():
             speaker = result.group()
             print('change speaker to', speaker)
-            start(speakers[speaker])
+            print(speakers[speaker])
             return True
 
     return False
 
 
-change_speaker_pattern = r'.+(?=[にへ](変更|変えて))'
+change_speaker_pattern = r'.+(?=番[にへ](音声変更|変更|変えて))'
 change_speaker_repatter = re.compile(change_speaker_pattern)
 def is_end_text(text):
     """
