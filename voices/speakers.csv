@@ -1,9 +1,10 @@
 SpeakerNumber,FolderName
 @default,CMAN-Woman
-0,test
+test,test
 1,CMAN-Woman
+2,speaker1
 3,Yukumo-AT1-F1-slowly
 4,Yukumo-AT10-F3
 5,student-Woman2
--1,speaker1
--2,ぼく，シマエーる
+test,test
+歌,ぼく，シマエーる
