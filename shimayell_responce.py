@@ -16,7 +16,7 @@ def init():
         reader = csv.reader(f)
         header = next(reader)
         speakers = { line[0] : line[1] for line in reader}
-        print('speakers:', speakers)
+        # print('speakers:', speakers)
 
     global speaker
     speaker = '@default'
@@ -24,20 +24,20 @@ def init():
     global voices
     voices = {}
     for folderName in set(speakers.values()):
-        print('folderName: {}'.format(folderName))
+        # print('folderName: {}'.format(folderName))
         csvpath = path.join(homepath, 'voices', folderName, 'voices.csv')
         if path.isfile(csvpath):
             with open(csvpath, 'r', encoding="utf-8") as f:
                 reader = csv.reader(f)
                 header = next(reader)
                 voices[folderName] = { line[0] : line[1] for line in reader if len(line) == 2 }
-            print('voices[', folderName, ']:', voices[folderName])
+            # print('voices[', folderName, ']:', voices[folderName])
 
     global end_texts
     with open(path.join(homepath, r'voices/end_texts.txt'), 'r', encoding="utf-8") as f:
         reader = csv.reader(f)
         end_texts = [ end_text for end_text in f.read().splitlines() ]
-        print('end_texts:', end_texts)
+        # print('end_texts:', end_texts)
 
 
 def change_speaker(text):

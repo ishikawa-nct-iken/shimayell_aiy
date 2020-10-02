@@ -4,6 +4,7 @@ import shimayell_responce as sr
 
 def main():
     while True:
+        print('Listening...')
         text = input()
         print('You said "', text, '"')
 
@@ -12,7 +13,7 @@ def main():
                 print('Bye!')
                 break
 
-        sr.responce(text)
+            sr.responce(text)
 
 
 if __name__ == '__main__':
