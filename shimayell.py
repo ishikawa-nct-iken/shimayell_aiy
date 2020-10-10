@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 
-import shimayell_responce as sr
-
 import logging
 
 import aiy.assistant.grpc
 import aiy.audio
 import aiy.voicehat
 
+import shimayell_responce as sr
 
 logging.basicConfig(
     level=logging.INFO,
@@ -26,11 +25,13 @@ def main():
             status_ui.status('listening')
             print('Listening...')
 
-            text, _ = assistant.recognize().replace(' ', '').replace('　', '')
+            text, _ = assistant.recognize()
 
             print('You said "', text, '"')
 
             if text:
+                text = text.replace(' ', '').replace('　', '')
+
                 if sr.is_end_text(text):
                     status_ui.status('stopping')
                     print('Bye!')
