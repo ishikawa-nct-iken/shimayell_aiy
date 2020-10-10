@@ -76,3 +76,9 @@ def end(speakerpath):
     終了時の音声を再生する．
     """
     play_voice(path.join(speakerpath, '終了時'), False)
+
+def end_sleep(speakerpath):
+    """
+    終了（睡眠）時の音声を再生する．
+    """
+    play_voice(path.join(speakerpath, '挨拶_おやすみ'), False)

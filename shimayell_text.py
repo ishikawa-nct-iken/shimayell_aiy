@@ -5,7 +5,9 @@ import shimayell_responce as sr
 def main():
     while True:
         print('Listening...')
-        text = input()
+
+        text = input().replace(' ', '').replace('　', '')
+
         print('You said "', text, '"')
 
         if text:

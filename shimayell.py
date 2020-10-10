@@ -26,7 +26,8 @@ def main():
             status_ui.status('listening')
             print('Listening...')
 
-            text, _ = assistant.recognize()
+            text, _ = assistant.recognize().replace(' ', '').replace('　', '')
+
             print('You said "', text, '"')
 
             if text:
