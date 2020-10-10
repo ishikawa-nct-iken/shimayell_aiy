@@ -59,6 +59,9 @@ def play_file(filepath):
     elif ext == '.mp3':
         print('mpg321', filepath)
         subprocess.run(['mpg321', filepath])
+    elif ext == '.m4a':
+        print('mplayer', filepath)
+        subprocess.run(['mplayer', filepath])
     else:
         print('cannot play file', filepath)
 
