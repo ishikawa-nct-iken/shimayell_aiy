@@ -3,7 +3,7 @@
 from os import path
 import csv
 import re
-from play_voice import play_voice, start, end
+from play_voice import play_voice, start, end, end_sleep
 
 homepath = path.dirname(__file__)
 
@@ -39,6 +39,14 @@ def init():
         end_texts = [ end_text for end_text in f.read().splitlines() ]
         # print('end_texts:', end_texts)
 
+    global end_sleep_texts
+    with open(path.join(homepath, r'voices/sleep_texts.txt'), 'r', encoding="utf-8") as f:
+        reader = csv.reader(f)
+        end_sleep_texts = [ text for text in f.read().splitlines() ]
+
+
+change_speaker_pattern = r'.+(?=番[にへ](音声変更|変更|変えて))'
+change_speaker_repatter = re.compile(change_speaker_pattern)
 
 def change_speaker(text):
     """
@@ -60,9 +68,6 @@ def change_speaker(text):
 
     return False
 
-
-change_speaker_pattern = r'.+(?=番[にへ](音声変更|変更|変えて))'
-change_speaker_repatter = re.compile(change_speaker_pattern)
 def is_end_text(text):
     """
     終了の言葉かどうか．
@@ -79,6 +84,10 @@ def is_end_text(text):
     """
     if text in end_texts:
         end(speakers[speaker])
+        return True
+
+    if text in end_sleep_texts:
+        end_sleep(speakers[speaker])
         return True
 
     return False
